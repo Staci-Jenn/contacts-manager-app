@@ -1,4 +1,4 @@
-package ContactsManager;
+
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -16,7 +16,7 @@ public class Contacts {
     // Main line of code
     public void contactInfo() {
         // Create Path objects for the directory and file
-    Path pathToContacts = Paths.get("/Users/jp/IdeaProjects/contacts-manager-app/ContactsManager/contacts.txt");
+    Path pathToContacts = Paths.get("contacts.txt");
         System.out.println(pathToContacts);
 
     try {

@@ -1,4 +1,4 @@
-package ContactsManager;
+
 
 import java.util.Scanner;
 
