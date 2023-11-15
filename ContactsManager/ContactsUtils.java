@@ -1,5 +1,3 @@
-package ContactsManager;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,5 +36,11 @@ public class ContactsUtils {
         }
     }
 
+    public void removeContact(Path pathToContacts, ContactsManager.Contact contact) {
+        List<String> currentListOfContacts = readFile(pathToContacts);
+//        String userDelete = scanner.nextLine();
+        String contactToDelete = "Staci";
+        writeListToFile(pathToContacts, currentListOfContacts);
+    }
 
 }
