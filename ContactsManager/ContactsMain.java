@@ -8,11 +8,9 @@ public class ContactsMain {
         Scanner input = new Scanner(System.in);
         input = new Scanner("contacts.txt");
 
-//        Contacts manager = new Contacts();
-//        manager.contactInfo();
+        Contacts manager = new Contacts();
+        manager.contactInfo();
     }
 
-    public void contactInfo(){
 
-    }
 }

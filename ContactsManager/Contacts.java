@@ -11,30 +11,7 @@ import java.util.List;
 
 public class Contacts {
 
-    private String name;
-    private int number;
 
-    // Constructor for name and number
-    public Contacts(String name, int number) {
-        this.name = name;
-        this.number = number;
-    }
-    // 2 properties with getter/setter
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
 
     // Main line of code
     public void contactInfo() {
