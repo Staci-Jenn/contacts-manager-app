@@ -1,3 +1,4 @@
+package ContactsManager;
 
 
 import java.util.Scanner;
@@ -9,7 +10,9 @@ public class ContactsMain {
         input = new Scanner("contacts.txt");
 
         Contacts manager = new Contacts();
-        manager.contactInfo();
+        ContactsUtils contactsUtils = new ContactsUtils();
+        manager.runContactsApp();
+//        contactsUtils.removeContact();
     }
 
 
