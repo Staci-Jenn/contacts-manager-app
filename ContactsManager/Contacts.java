@@ -58,7 +58,7 @@ public class Contacts {
 
         //Append Contact
 //        private void addContact() {
-        // List contacts = loadConatcs()
+        // List contacts = loadContacts()
 
 //            System.out.println("Enter a name");
 //            String userAddName = input.nextLine();

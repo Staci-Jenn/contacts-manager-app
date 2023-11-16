@@ -11,11 +11,11 @@ public class ContactsUtils {
     Path pathToContacts = Paths.get("contacts.txt");
 
 
-    // Read and Returns Contacts
+    // 1. View Contacts
     public List<Contact> loadContacts(Path pathToContacts) {
         List<Contact> contacts = new ArrayList<>();
         try {
-            List<String>  contactsFromFile = Files.readAllLines(pathToContacts);
+            List<String> contactsFromFile = Files.readAllLines(pathToContacts);
             for (String stringContact : contactsFromFile){
                 String name = stringContact.split("\\|")[0].trim();
                 String number = stringContact.split("\\|")[1].trim();
@@ -27,15 +27,7 @@ public class ContactsUtils {
         }
         return contacts;
     }
-
-//    public void contactInfo() {
-//        //Delete Test
-//        List<String> currentListOfContacts = loadContact(Path pathToContacts);
-//        String contactToDelete = "Staci | 21546461";
-//        writeListToFile(path)
-//    }
-
-    // Outputs list and accepts a list as its argument
+    // Outputs list
     public void outputList(List<Contact> contacts) {
         System.out.println("Outputting list!!");
         for (Contact contact : contacts) {
@@ -46,9 +38,9 @@ public class ContactsUtils {
 
 
     // Write a list to the file
-    public void writeListToFile(Path pathToFile, List<String> listToWrite) {
+    public void writeListToFile(Path pathToContacts, List<String> listToWrite) {
         try {
-            Files.write(pathToFile, listToWrite);
+            Files.write(pathToContacts, listToWrite);
         } catch (IOException iox) {
             iox.printStackTrace();
             System.out.println(iox.getMessage());
@@ -56,6 +48,18 @@ public class ContactsUtils {
     }
 
 
+    // 3. Search Contacts
+    public Contact searchContactByName(List<Contact> contacts, String name) {
+        for (Contact contact : contacts) {
+            if (contact.getName().equalsIgnoreCase(name)) {
+                return contact;
+            }
+        }
+        return null;
+    }
+
+    List<Contact> contacts = loadContacts(pathToContacts);
+    Contact contact = searchContactByName(contacts, )
 
     //    //Removing Contacts
     public void removeContact(Path pathToContacts, ContactsManager.Contact contactToRemove) {
