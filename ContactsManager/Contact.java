@@ -2,10 +2,10 @@ package ContactsManager;
 
 public class Contact {
     private String name;
-    private int number;
+    private String number;
 
     // Constructor for name and number
-    public Contact(String name, int number) {
+    public Contact(String name, String number) {
         this.name = name;
         this.number = number;
     }
@@ -18,15 +18,22 @@ public class Contact {
         this.name = name;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public String toString(){
-        return name + " | " + number;
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", number=" + number +
+                '}';
     }
+//    public String toString(){
+//        return name + " | " + number;
+//    }
 }
