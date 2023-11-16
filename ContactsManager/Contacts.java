@@ -27,13 +27,17 @@ public class Contacts {
 
         //Switch/Case
         switch (userInput) {
-            case
+            case 1 -> viewContacts();
+            case 2 -> addContact();
+            case 3 -> searchContact();
+            case 4 -> deleteContact();
+            case 5 -> System.exit(0);
         }
 
 
         // Create Path objects for the directory and file
         Path pathToContacts = Paths.get("contacts.txt");
-//        System.out.println(pathToContacts);
+        System.out.println(pathToContacts);
 
         List<String> currentContacts = contactsUtils.readFile(pathToContacts);
         contactsUtils.outputList(currentContacts);
@@ -46,16 +50,24 @@ public class Contacts {
             iox.printStackTrace();
         }
 
-        //Append Contacts
-        List<String> moreContacts = Arrays.asList("Staci | 21546461");
-        try {
-            Files.write(pathToContacts, moreContacts, StandardOpenOption.APPEND);
-        } catch (IOException iox){
-            System.out.println("Error writing to file " + iox.getMessage());
+        //Append Contact
+        private void addContact() {
+            System.out.println("Enter a name");
+            String userAddName = input.nextLine();
+            System.out.println("Enter a number");
+            int userAddNumber = input.nextInt();
+            Contact contact = new Contact(userAddName, userAddNumber);
+
+            List<String> moreContacts = Arrays.asList( );
+            try {
+                Files.write(pathToContacts, moreContacts, StandardOpenOption.APPEND);
+            } catch (IOException iox) {
+                System.out.println("Error writing to file " + iox.getMessage());
+            }
+
         }
 
-
-
     }
+
 
 }
