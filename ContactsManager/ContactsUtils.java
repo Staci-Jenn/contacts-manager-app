@@ -1,9 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
 
 public class ContactsUtils {
 
@@ -36,11 +35,33 @@ public class ContactsUtils {
         }
     }
 
-    public void removeContact(Path pathToContacts, ContactsManager.Contact contact) {
+    //Append Contacts
+//    List<String> moreContacts = Arrays.asList("Staci | 21546461");
+//        try {
+//        Files.write(pathToContacts, moreContacts, StandardOpenOption.APPEND);
+//    } catch (IOException iox){
+//        System.out.println("Error writing to file " + iox.getMessage());
+//    }
+
+
+
+    //Removing Contacts
+//    public void removeContact(Path pathToContacts, ContactsManager.Contact contactToRemove) {
         List<String> currentListOfContacts = readFile(pathToContacts);
-//        String userDelete = scanner.nextLine();
-        String contactToDelete = "Staci";
-        writeListToFile(pathToContacts, currentListOfContacts);
+        String contactToDelete = "Staci | 21546461";
+////        String userDelete = scanner.nextLine();
+//
+//        currentListOfContacts.removeIf(contact -> contact.equals(contactToDelete));
+//        writeListToFile(pathToContacts, currentListOfContacts);
+//    }
+//
+
+    Iterator<String> contactIterator = currentListOfContacts.iterator();
+    while(contactIterator.hasNext()){
+        String contact = contactIterator.next();
+        if (contact.equals(contactToDelete)) {
+            contactIterator.remove();
+        }
     }
 
 }
