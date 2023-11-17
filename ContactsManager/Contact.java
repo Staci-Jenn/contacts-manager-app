@@ -20,7 +20,6 @@ public class Contact {
     }
 
     public String getNumber() {
-//        return number;
         return formatPhoneNumber(number);
     }
 
