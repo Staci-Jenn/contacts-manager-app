@@ -20,11 +20,29 @@ public class Contact {
     }
 
     public String getNumber() {
-        return number;
+//        return number;
+        return formatPhoneNumber(number);
     }
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    private String formatPhoneNumber(String phoneNumber) {
+        // Remove all non-digit characters from the phone number
+        String digitsOnly = phoneNumber.replaceAll("\\D", "");
+
+        // Check if the number has the required length for formatting
+        if (digitsOnly.length() == 10) {
+            // Format number with dashes (###) ###-####
+            return String.format("(%s) %s-%s",
+                    digitsOnly.substring(0, 3),
+                    digitsOnly.substring(3, 6),
+                    digitsOnly.substring(6));
+        } else {
+            // If the number doesn't have 10 digits, return the original number
+            return phoneNumber;
+        }
     }
 
     public String toString(){
