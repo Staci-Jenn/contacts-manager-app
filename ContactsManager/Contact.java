@@ -9,7 +9,8 @@ public class Contact {
         this.name = name;
         this.number = number;
     }
-    // 2 properties with getter/setter
+
+    // Getter/Setter
     public String getName() {
         return name;
     }
@@ -33,7 +34,4 @@ public class Contact {
                 ", number=" + number +
                 '}';
     }
-//    public String toString(){
-//        return name + " | " + number;
-//    }
 }

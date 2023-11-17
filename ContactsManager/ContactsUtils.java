@@ -1,6 +1,7 @@
 package ContactsManager;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,7 +39,7 @@ public class ContactsUtils {
 
 
     // Write a list to the file
-    public void writeListToFile(Path pathToContacts, List<String> listToWrite) {
+    void writeListToFile(Path pathToContacts, List<String> listToWrite) {
         try {
             Files.write(pathToContacts, listToWrite);
         } catch (IOException iox) {
@@ -49,41 +50,53 @@ public class ContactsUtils {
 
 
     // 3. Search Contacts
-    public Contact searchContactByName(List<Contact> contacts, String name) {
+    Contact searchContactByName(List<Contact> contacts, String name) {
         for (Contact contact : contacts) {
             if (contact.getName().equalsIgnoreCase(name)) {
                 return contact;
             }
         }
         return null;
-
-//        Contact contact = searchContactByName(contacts, name);
-
     }
 
+    // 4. Remove Contacts
+    Contact deleteContact(List<Contact> contacts, String name) {
+        for (Iterator<Contact> iterator = contacts.iterator(); iterator.hasNext();) {
+            Contact contact = iterator.next();
+            if (contact.getName().equalsIgnoreCase(name)) {
+                iterator.remove();
+                return contact;
+            }
+        }
+        return null;
+    }
 
+    void writeContactsToFile(Path pathToContacts, List<String> listToWrite) {
+        try {
+            List<String> contactsAsString = new ArrayList<>();
+            for (Contact contact : listToWrite) {
+                String contactString = contact.getName() + "," + contact.getNumber() + ",";
+                contactsAsString.add(contactString);
+            }
+//            Files.write(pathToContacts, contactsAsString);
+        } catch (IOException iox) {
+            iox.printStackTrace();
+            System.out.println(iox.getMessage());
+        }
+    }
 
-
-
-    //    //Removing Contacts
-    public void removeContact(Path pathToContacts, ContactsManager.Contact contactToRemove) {
-//        List<String> currentListOfContacts = loadContact(pathToContacts);
-//        String contactToDelete = "Staci | 21546461";
-////        String userDelete = scanner.nextLine();
-//
-//        currentListOfContacts.removeIf(contact -> contact.equals(contactToRemove.toString()));
-////        writeListToFile(pathToContacts, currentListOfContacts);
-//    }
-////
-//
-//    Iterator<String> contactIterator = currentListOfContacts.iterator();
-//    while(contactIterator.hasNext()){
-//        String contact = contactIterator.next();
-//        if (contact.equals(contactToDelete)) {
-//            contactIterator.remove();
+//    Contact  writeContactsToFile(List<Contact> contacts) {
+//        Path filePath = Paths.get("contacts.txt"); // Convert filename to a Path
+//        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(filePath))) {
+//            for (Contact contact : contacts) {
+//                writer.println(contact.toString());
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
 //        }
+//        return null;
 //    }
 
     }
 
-    }
+

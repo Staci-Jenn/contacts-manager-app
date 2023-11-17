@@ -12,7 +12,7 @@ public class ContactsMain {
         Contacts manager = new Contacts();
         ContactsUtils contactsUtils = new ContactsUtils();
         manager.runContactsApp();
-//        contactsUtils.removeContact();
+//        contactsUtils.deleteContact();
     }
 
 
