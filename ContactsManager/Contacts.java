@@ -41,11 +41,6 @@ public class Contacts {
         }
 
 
-//        System.out.println(pathToContacts);
-
-
-//        contactsUtils.outputList(currentContacts);
-
         try {
             if (Files.notExists(pathToContacts)) {
                 Files.createFile(pathToContacts);
@@ -54,8 +49,6 @@ public class Contacts {
             iox.printStackTrace();
         }
 
-
-        // 1. View Contacts
 
     }
 
@@ -79,17 +72,5 @@ public class Contacts {
         }
     }
 
-
-    public void searchContact() {
-        List<Contact> currentContacts = contactsUtils.loadContacts(pathToContacts);
-        System.out.println("Enter name of contact to search for");
-        String contactSearch = input.nextLine();
-        for (Contact currentContact : currentContacts) {
-            String contact = String.valueOf(currentContact);
-            if (contact.contains(contactSearch)) {
-                System.out.println(contact);
-            }
-        }
-    }
 }
 

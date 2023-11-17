@@ -16,8 +16,8 @@ public class ContactsUtils {
     public List<Contact> loadContacts(Path pathToContacts) {
         List<Contact> contacts = new ArrayList<>();
         try {
-            List<String>  contactsFromFile = Files.readAllLines(pathToContacts);
-            for (String stringContact : contactsFromFile){
+            List<String> contactsFromFile = Files.readAllLines(pathToContacts);
+            for (String stringContact : contactsFromFile) {
                 String name = stringContact.split("\\|")[0].trim();
                 String number = stringContact.split("\\|")[1].trim();
                 Contact contact = new Contact(name, number);
@@ -40,10 +40,10 @@ public class ContactsUtils {
     public void outputList(List<Contact> contacts) {
         System.out.println("Outputting list!!");
         for (Contact contact : contacts) {
-            System.out.println(contact.getName() + " | "  + contact.getNumber());
+            System.out.println(contact.getName() + " | " + contact.getNumber());
         }
         System.out.println("--------------");
-        }
+    }
 
 
     // Write a list to the file
@@ -56,25 +56,5 @@ public class ContactsUtils {
         }
     }
 
-
-    //    //Removing Contacts
-    public void removeContact(Path pathToContacts, ContactsManager.Contact contactToRemove) {
-//        List<String> currentListOfContacts = loadContact(pathToContacts);
-//        String contactToDelete = "Staci | 21546461";
-////        String userDelete = scanner.nextLine();
-//
-//        currentListOfContacts.removeIf(contact -> contact.equals(contactToRemove.toString()));
-////        writeListToFile(pathToContacts, currentListOfContacts);
-//    }
-////
-//
-//    Iterator<String> contactIterator = currentListOfContacts.iterator();
-//    while(contactIterator.hasNext()){
-//        String contact = contactIterator.next();
-//        if (contact.equals(contactToDelete)) {
-//            contactIterator.remove();
-//        }
-//    }
-
-    }
 }
+
