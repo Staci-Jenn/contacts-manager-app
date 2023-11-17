@@ -78,6 +78,7 @@ public class Contacts {
                 System.out.println("Do you want to enter another contact? \"yes\" or \"no\"");
                 answer = input.nextLine();
             } while (answer.equalsIgnoreCase("yes"));
+            currentContacts = contactsUtils.loadContacts(pathToContacts);
         } catch (IOException iox) {
             System.out.println("Error writing to file " + iox.getMessage());
         }

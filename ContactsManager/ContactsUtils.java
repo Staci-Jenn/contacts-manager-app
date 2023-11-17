@@ -36,7 +36,7 @@ public class ContactsUtils {
         }
         return contacts;
     }
-    // Outputs list
+    //1. View List
     public void outputList(List<Contact> contacts) {
         System.out.println("Name | Phone number");
         System.out.println("---------------");
@@ -44,17 +44,6 @@ public class ContactsUtils {
             System.out.println(contact.getName() + "|" + contact.getNumber());
         }
     }
-
-    // Write a list to the file
-    void writeListToFile(Path pathToContacts, List<String> listToWrite) {
-        try {
-            Files.write(pathToContacts, listToWrite);
-        } catch (IOException iox) {
-            iox.printStackTrace();
-            System.out.println(iox.getMessage());
-        }
-    }
-
 
     // 3. Search Contacts
     Contact searchContactByName(List<Contact> contacts, String name) {
@@ -90,10 +79,7 @@ public class ContactsUtils {
         } catch (IOException iox){
             System.out.println(iox.getMessage());
         }
-
     }
-
-
 
     }
 
