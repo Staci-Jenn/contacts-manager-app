@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +15,7 @@ public class Contacts {
 
 
     ContactsUtils contactsUtils = new ContactsUtils();
+    Path pathToContacts = Paths.get("contacts.txt");
 
 
     // Main line of code
@@ -27,12 +31,11 @@ public class Contacts {
         String userInput = input.nextLine();
 
 
-
         //Switch/Case
         switch (userInput) {
             case "1" -> contactsUtils.outputList(currentContacts);
-//            case "2" -> addContact();
-//            case "3" -> searchContact();
+            case "2" -> addContact();
+            case "3" -> searchContact();
 //            case "4" -> deleteContact();
             case "5" -> System.exit(0);
         }
@@ -54,31 +57,39 @@ public class Contacts {
 
         // 1. View Contacts
 
+    }
 
+    //Add Contact
+    private void addContact() {
+        try {
+            String answer;
+            do {
+                System.out.println("Enter a name");
+                String userAddName = input.nextLine();
+                System.out.println("Enter a number");
+                String userAddNumber = input.nextLine();
+                Contact contact = new Contact(userAddName, userAddNumber);
 
-        //Append Contact
-//        private void addContact() {
-        // List contacts = loadConatcs()
-
-//            System.out.println("Enter a name");
-//            String userAddName = input.nextLine();
-//            System.out.println("Enter a number");
-//            int userAddNumber = input.nextInt();
-//            Contact contact = new Contact(userAddName, userAddNumber);
-//              contacts.add(
-
-//            List<String> moreContacts = Arrays.asList( );
-//            try {
-//                Files.write(pathToContacts, moreContacts, StandardOpenOption);
-//            } catch (IOException iox) {
-//                System.out.println("Error writing to file " + iox.getMessage());
-//            }
-//
-//        }
-
+                Files.writeString(pathToContacts, contact.toString(), StandardOpenOption.APPEND);
+                System.out.println("Do you want to enter another contact? \"yes\" or \"no\"");
+                answer = input.nextLine();
+            } while (answer.equalsIgnoreCase("yes"));
+        } catch (IOException iox) {
+            System.out.println("Error writing to file " + iox.getMessage());
+        }
     }
 
 
-
-
+    public void searchContact() {
+        List<Contact> currentContacts = contactsUtils.loadContacts(pathToContacts);
+        System.out.println("Enter name of contact to search for");
+        String contactSearch = input.nextLine();
+        for (Contact currentContact : currentContacts) {
+            String contact = String.valueOf(currentContact);
+            if (contact.contains(contactSearch)) {
+                System.out.println(contact);
+            }
+        }
+    }
 }
+
