@@ -93,17 +93,7 @@ public class ContactsUtils {
 
     }
 
-//    Contact  writeContactsToFile(List<Contact> contacts) {
-//        Path filePath = Paths.get("contacts.txt"); // Convert filename to a Path
-//        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(filePath))) {
-//            for (Contact contact : contacts) {
-//                writer.println(contact.toString());
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+
 
     }
 
