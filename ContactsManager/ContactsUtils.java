@@ -38,12 +38,12 @@ public class ContactsUtils {
     }
     // Outputs list
     public void outputList(List<Contact> contacts) {
+        System.out.println("Name | Phone number");
+        System.out.println("---------------");
         for (Contact contact : contacts) {
             System.out.println(contact.getName() + "|" + contact.getNumber());
         }
-        System.out.println("--------------");
     }
-
 
     // Write a list to the file
     void writeListToFile(Path pathToContacts, List<String> listToWrite) {
