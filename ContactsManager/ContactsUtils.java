@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class ContactsUtils {
@@ -17,12 +18,19 @@ public class ContactsUtils {
         List<Contact> contacts = new ArrayList<>();
         try {
             List<String> contactsFromFile = Files.readAllLines(pathToContacts);
-            for (String stringContact : contactsFromFile){
-                String name = stringContact.split("\\|")[0].trim();
-                String number = stringContact.split("\\|")[1].trim();
-                Contact contact = new Contact(name, number);
-                contacts.add(contact);
+
+            for (String stringContact : contactsFromFile) {
+                String[] contactData = stringContact.split("\\|");
+                if (contactData.length >= 2) {
+                    String name = contactData[0].trim();
+                    String number = contactData[1].trim();
+                    Contact contact = new Contact(name, number);
+                    contacts.add(contact);
+                } else {
+                    System.out.println("Invalid format in line: " + stringContact);
+                }
             }
+
         } catch (IOException iox) {
             iox.printStackTrace();
         }
@@ -30,12 +38,11 @@ public class ContactsUtils {
     }
     // Outputs list
     public void outputList(List<Contact> contacts) {
-        System.out.println("Outputting list!!");
         for (Contact contact : contacts) {
-            System.out.println(contact.getName() + " | "  + contact.getNumber());
+            System.out.println(contact.getName() + "|" + contact.getNumber());
         }
         System.out.println("--------------");
-        }
+    }
 
 
     // Write a list to the file
@@ -71,18 +78,19 @@ public class ContactsUtils {
         return null;
     }
 
-    void writeContactsToFile(Path pathToContacts, List<String> listToWrite) {
-        try {
-            List<String> contactsAsString = new ArrayList<>();
-            for (Contact contact : listToWrite) {
-                String contactString = contact.getName() + "," + contact.getNumber() + ",";
-                contactsAsString.add(contactString);
-            }
-//            Files.write(pathToContacts, contactsAsString);
-        } catch (IOException iox) {
-            iox.printStackTrace();
+    void writeContactsToFile(Path pathToContacts, List<Contact> listToWrite) {
+        List<String> contactsAsString = new ArrayList<>();
+        for (Contact contact : listToWrite) {
+            String contactString = contact.getName() + "|" + contact.getNumber();
+            contactsAsString.add(contactString);
+        }
+
+        try{
+            Files.write(pathToContacts, contactsAsString);
+        } catch (IOException iox){
             System.out.println(iox.getMessage());
         }
+
     }
 
 //    Contact  writeContactsToFile(List<Contact> contacts) {

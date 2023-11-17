@@ -27,11 +27,7 @@ public class Contact {
         this.number = number;
     }
 
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "name='" + name + '\'' +
-                ", number=" + number +
-                '}';
+    public String toString(){
+        return "\n" + name + "|" + number;
     }
 }
