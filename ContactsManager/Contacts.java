@@ -21,6 +21,7 @@ public class Contacts {
         Path pathToContacts = Paths.get("contacts.txt");
         List<Contact> currentContacts = contactsUtils.loadContacts(pathToContacts);
 
+
         // Menu
         System.out.print("1. View contacts.\n" + "2. Add a new contact.\n" + "3. Search a contact by name.\n" + "4. Delete an existing contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):\n");
 
@@ -32,7 +33,16 @@ public class Contacts {
         switch (userInput) {
             case "1" -> contactsUtils.outputList(currentContacts);
 //            case "2" -> addContact();
-//            case "3" -> searchContact();
+            case "3" -> {
+                System.out.println("Enter the name to search:");
+                String searchName = input.nextLine();
+                Contact foundContact = contactsUtils.searchContactByName(currentContacts, searchName);
+                if (foundContact != null) {
+                    System.out.println("Contact found: " + foundContact.getName() + " | " + foundContact.getNumber());
+                } else {
+                    System.out.println("Contact not found.");
+                }
+            }
 //            case "4" -> deleteContact();
             case "5" -> System.exit(0);
         }

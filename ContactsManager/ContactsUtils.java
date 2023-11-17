@@ -56,10 +56,14 @@ public class ContactsUtils {
             }
         }
         return null;
+
+//        Contact contact = searchContactByName(contacts, name);
+
     }
 
-    List<Contact> contacts = loadContacts(pathToContacts);
-    Contact contact = searchContactByName(contacts, )
+
+
+
 
     //    //Removing Contacts
     public void removeContact(Path pathToContacts, ContactsManager.Contact contactToRemove) {
@@ -81,4 +85,5 @@ public class ContactsUtils {
 //    }
 
     }
-}
+
+    }
