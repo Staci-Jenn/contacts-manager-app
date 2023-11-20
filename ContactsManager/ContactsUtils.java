@@ -36,25 +36,14 @@ public class ContactsUtils {
         }
         return contacts;
     }
-    // Outputs list
+    //1. View List
     public void outputList(List<Contact> contacts) {
+        System.out.println("Name | Phone number");
+        System.out.println("---------------");
         for (Contact contact : contacts) {
             System.out.println(contact.getName() + "|" + contact.getNumber());
         }
-        System.out.println("--------------");
     }
-
-
-    // Write a list to the file
-    void writeListToFile(Path pathToContacts, List<String> listToWrite) {
-        try {
-            Files.write(pathToContacts, listToWrite);
-        } catch (IOException iox) {
-            iox.printStackTrace();
-            System.out.println(iox.getMessage());
-        }
-    }
-
 
     // 3. Search Contacts
     Contact searchContactByName(List<Contact> contacts, String name) {
@@ -90,20 +79,7 @@ public class ContactsUtils {
         } catch (IOException iox){
             System.out.println(iox.getMessage());
         }
-
     }
-
-//    Contact  writeContactsToFile(List<Contact> contacts) {
-//        Path filePath = Paths.get("contacts.txt"); // Convert filename to a Path
-//        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(filePath))) {
-//            for (Contact contact : contacts) {
-//                writer.println(contact.toString());
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     }
 

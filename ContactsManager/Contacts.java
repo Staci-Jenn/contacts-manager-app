@@ -24,26 +24,6 @@ public class Contacts {
     // Main line of code
     public void runContactsApp() {
 
-        // Create Path objects for the directory and file
-
-
-//        // Menu
-//        System.out.print("1. View contacts.\n" + "2. Add a new contact.\n" + "3. Search a contact by name.\n" + "4. Delete an existing contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):\n");
-//
-//        String userInput = input.nextLine();
-
-
-        //Switch/Case
-//        switch (userInput) {
-//            case "1" -> contactsUtils.outputList(currentContacts);
-//            case "2" -> addContact();
-//            case "3" -> searchContact();
-////            case "4" -> deleteContact();
-//            case "5" -> System.exit(0);
-//        }
-
-
-
         try {
             if (Files.notExists(pathToContacts)) {
                 Files.createFile(pathToContacts);
@@ -52,44 +32,38 @@ public class Contacts {
             iox.printStackTrace();
         }
 
-        // Menu
-        System.out.print("1. View contacts.\n" + "2. Add a new contact.\n" + "3. Search a contact by name.\n" + "4. Delete an existing contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):\n");
+        boolean exit = false;
+        while (!exit) {
+            // Menu
+            System.out.print("1. View contacts.\n" + "2. Add a new contact.\n" + "3. Search a contact by name.\n" + "4. Delete an existing contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):\n");
 
 
-        String userInput = input.nextLine();
+            String userInput = input.nextLine();
 
-        //Switch/Case
-        switch (userInput) {
-            case "1" -> contactsUtils.outputList(currentContacts);
-            case "2" -> addContact();
-            case "3" -> {
-                System.out.println("Enter the name to search:");
-                String searchName = input.nextLine();
-                Contact foundContact = contactsUtils.searchContactByName(currentContacts, searchName);
-                if (foundContact != null) {
-                    System.out.println("Contact found: " + foundContact.getName() + " | " + foundContact.getNumber());
-                } else {
-                    System.out.println("Contact not found.");
-                }
+            //Switch/Case
+            switch (userInput) {
+                case "1":
+                    contactsUtils.outputList(currentContacts);
+                    break;
+                case "2":
+                    addContact();
+                    break;
+                case "3":
+                    searchContact();
+                    break;
+                case "4":
+                    deleteContact();
+                    break;
+                case "5":
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+                    break;
             }
-            case "4" -> {
-                System.out.println("Enter the name of the contact to delete:");
-                String deleteName = input.nextLine();
-                Contact contactDeleted = contactsUtils.deleteContact(currentContacts, deleteName);
-                if (contactDeleted != null) {
-                    System.out.println("Contact deleted successfully.");
-                    //Update the contacts.txt file
-                    contactsUtils.writeContactsToFile(pathToContacts, currentContacts);
-                } else {
-                    System.out.println("Contact not found.");
-                }
-            }
-            case "5" -> System.exit(0);
         }
-
     }
 
-    //Add Contact
     private void addContact() {
         try {
             String answer;
@@ -100,15 +74,37 @@ public class Contacts {
                 String userAddNumber = input.nextLine();
                 Contact contact = new Contact(userAddName, userAddNumber);
 
-                Files.writeString(pathToContacts, contact.toString(), StandardOpenOption.APPEND);
+                Files.writeString(pathToContacts, contact.toString() + "\n", StandardOpenOption.APPEND);
                 System.out.println("Do you want to enter another contact? \"yes\" or \"no\"");
                 answer = input.nextLine();
             } while (answer.equalsIgnoreCase("yes"));
+            currentContacts = contactsUtils.loadContacts(pathToContacts);
         } catch (IOException iox) {
             System.out.println("Error writing to file " + iox.getMessage());
         }
     }
 
+    private void searchContact() {
+        System.out.println("Enter the name to search:");
+        String searchName = input.nextLine();
+        Contact foundContact = contactsUtils.searchContactByName(currentContacts, searchName);
+        if (foundContact != null) {
+            System.out.println("Contact found: " + foundContact.getName() + " | " + foundContact.getNumber());
+        } else {
+            System.out.println("Contact not found.");
+        }
+    }
 
+    private void deleteContact() {
+        System.out.println("Enter the name of the contact to delete:");
+        String deleteName = input.nextLine();
+        Contact contactDeleted = contactsUtils.deleteContact(currentContacts, deleteName);
+        if (contactDeleted != null) {
+            System.out.println("Contact deleted successfully.");
+            // Update the contacts.txt file
+            contactsUtils.writeContactsToFile(pathToContacts, currentContacts);
+        } else {
+            System.out.println("Contact not found.");
+        }
+    }
 }
-
